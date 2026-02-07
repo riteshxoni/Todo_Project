@@ -1,0 +1,44 @@
+.myinput
+{
+    outline: none;
+    border: none;
+    /* width: 200px; */
+}
+.myfs
+{
+    font-weight: 300;
+    line-height: 1.2;
+    font-size: 50px;
+}
+
+.myalert
+{
+    width: 200px;
+    margin: auto;
+}
+.myinput2
+{
+    outline: none;
+    border: none;
+}
+
+
+/* Light mode (default) */
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
