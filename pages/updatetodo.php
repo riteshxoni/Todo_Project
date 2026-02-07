@@ -1,10 +1,8 @@
 <?php
 require '../config/db.php';
 
-if(isset($_GET['id']))
-{
-    try 
-    {
+if (isset($_GET['id'])) {
+    try {
         $id = $_GET['id'];
         $sql = "SELECT id, todoname, tododate FROM todo where id=?";
         $stmt = $conn->prepare($sql);
@@ -12,25 +10,17 @@ if(isset($_GET['id']))
         $stmt->execute([$id]);
         // Execute the SQL query
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(!$row)
-        {
+        if (!$row) {
             header("Location: ../index.php?result=Please provide correct todo id.");
             exit;
         }
-    } 
-    catch (PDOException $e) 
-    {
+    } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-}
-else
-{
+} else {
     header("Location: ../index.php?result=Please provide todo id.");
     exit;
 }
-
-
-
 ?>
 
 <!doctype html>
@@ -55,42 +45,48 @@ else
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
-<body class="container">
-    <header class="mt-4">
-        <div class="d-flex align-items-center justify-content-evenly">
-            <div class="d-flex align-items-center justify-content-center">
-                <h1 class=" me-2">Todo Update </h1>
-                <div style="height: 35px;"><img src="../assets/img/logo.png" class="h-100 rounded-5" alt=""></div>
-            </div>
-            <div class=" ">
-                <!-- <i class="bi bi-sun-fill"></i>
-                    <i class="bi bi-moon-fill"></i> -->
-                <button id="themeToggle">🌙 Dark Mode</button>
-            </div>
-        </div>
+<body>
+    <header>
+        <?php include '../includes/header.php' ?>
     </header>
-    <main>
-        <form action="../controller/UpdateTodo.php" method="post">
-            <div class="row justify-content-center my-3">
-                <div class="col-md-10 col-lg-6 text-center">
-                    <div class="row g-2 g-lg-1">
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                        <div class="col-sm-5">
-                            <input type="text" name="todoname" class="myinput border-bottom shadow-lg rounded p-2" required value="<?php echo $row['todoname']; ?>">
-                        </div>
-                        <div class="col-sm-5">
-                            <input type="date" name="tododate" class="myinput border-bottom shadow-lg rounded p-2" required value="<?php echo $row['tododate']; ?>">
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn btn-secondary"><span class="d-sm-none">Update Todo </span><i class="bi bi-arrow-repeat"></i></button>
+    <div class="container" style="min-height: 500px;">
+        <header class="mt-4">
+            <div class="d-flex align-items-center justify-content-evenly">
+                <div class="d-flex align-items-center justify-content-center">
+                    <h1 class=" me-2">Todo Update </h1>
+                    <div style="height: 35px;"><img src="../assets/img/logo.png" class="h-100 rounded-5" alt=""></div>
+                </div>
+                <div class=" ">
+                    <!-- <i class="bi bi-sun-fill"></i>
+                            <i class="bi bi-moon-fill"></i> -->
+                    <button id="themeToggle">🌙 Dark Mode</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <form action="../controller/UpdateTodo.php" method="post">
+                <div class="row justify-content-center my-3">
+                    <div class="col-md-10 col-lg-6 text-center">
+                        <div class="row g-2 g-lg-1">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                            <div class="col-sm-5">
+                                <input type="text" name="todoname" class="myinput border-bottom shadow-lg rounded p-2" required value="<?php echo $row['todoname']; ?>">
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="date" name="tododate" class="myinput border-bottom shadow-lg rounded p-2" required value="<?php echo $row['tododate']; ?>">
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-secondary"><span class="d-sm-none">Update Todo </span><i class="bi bi-arrow-repeat"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </main>
+            </form>
+        </main>
+    </div>
+
     <footer>
-        <!-- place footer here -->
+        <?php include '../includes/footer.php' ?>
     </footer>
     <script src="../assets/js/script.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
